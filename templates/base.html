@@ -1,11 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victorian Fireplaces</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <title>Victorian Fireplaces</title>
+  <!-- Bootstrap -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- MDB-->
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <!-- Custom Styles -->
+  <link href="{% static 'css/style.css' %} " rel="stylesheet">
+  
+  {% block header %}
+  {% endblock %}
 </head>
 <body>
+  <!-- Nav -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark black scrolling-navbar">
+    <div class="container">
+      <!-- Brand -->
+      <a href="/" class="navbar-brand">
+        <strong>Victorian Fireplace Company</strong>
+      </a>
+
+      <!-- Collapsible -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="{% url 'sales:test' %}" class="nav-link">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div style="padding-top: 60px;">
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert" role="alert">
+      {{message}}
+    </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <!-- Footer -->
+  <footer class="page-footer fix-down text-center font-small mt-4">
+    <div class="footer-copyright">© 2022 Fred Gryson</div>
+  </footer>
+  <!-- Scripts -->
+  {% block scripts %}
+  {% endblock scripts %}
+  <script src="{% static 'js/jquery-3.6.0.min.js' %} "></script>
+  <!-- Bootstrap -->
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- MDB -->
+  <script src="{% static 'js/mdb.min.js' %} "></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/2cdcea010c.js" crossorigin="anonymous"></script>
+  <!-- Popper JS -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
 </body>
 </html>

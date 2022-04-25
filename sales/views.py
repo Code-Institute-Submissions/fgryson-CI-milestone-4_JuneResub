@@ -1,4 +1,7 @@
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
-def index(request):
-    return HttpResponse("Welcome to the Sales index.")
+class TestView(TemplateView):
+    """
+    Test view
+    """
+    template_name = 'test.html'
