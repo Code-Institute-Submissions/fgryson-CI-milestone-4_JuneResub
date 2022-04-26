@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from allauth.utils import get_user_model
 from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
