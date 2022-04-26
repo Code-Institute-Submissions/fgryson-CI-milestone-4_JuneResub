@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView, ListView
-from models import *
+from .models import *
 
 
 class HomeView(ListView):
