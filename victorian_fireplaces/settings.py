@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = join(BASE_DIR, 'templates')
 STATICFILES_DIRS = (
     join(BASE_DIR, 'static'),
-    )
+)
 
 
 # Quick-start development settings - unsuitable for production
@@ -154,3 +154,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Variables for STRIPE API
+STRIPE_SECRET_KEY = ''
+STRIPE_PUBLIC_KEY = ''
