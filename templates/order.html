@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class=" pt-5">
+    <div class="container">
+        <table class="table ">
+            <thead class="thead-dark ">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item Title</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order_item in object.items.all %}
+              <tr>
+
+              </tr>
+              {% empty %}
+              <p>No Items in Cart</p>
+              {% endfor %}
+              <tr>
+                  <td colspan="4">
+                      <b>Order Total</b>
+                  </td>
+                  <td>
+                      <b>€{{object.get_total}}</b>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="5">
+                      {% if object.items.all.count > 0 %}
+                      <a href="/checkout" class="btn btn-warning float-right ml-2">Checkout</a>
+                      {% endif %}
+                      <a href="/" class="btn btn-primary float-right">Go Back</a>
+                  </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}
