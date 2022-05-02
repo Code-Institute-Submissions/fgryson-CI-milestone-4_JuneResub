@@ -16,7 +16,24 @@
             <tbody>
               {% for order_item in object.items.all %}
               <tr>
-
+                <th scope="row">{{forloop.counter}}</th>
+                <td>
+                  <a href = "{% url 'sales:product' slug=order_item.item.slug %}"> {{order_item.item.title}} </a>
+                </td>
+                <td>€{{order_item.item.get_price}} </td>
+                <td>
+                  <a href="{% url 'sales:decrease-quantity' slug=order_item.item.slug %}"> <i class="fas fa-minus"></i></a>
+                  {{order_item.quantity}}
+                  <a href="{% url 'sales:increase-quantity' slug=order_item.item.slug %}"><i class="fas fa-plus"></i> </a>
+                </td>
+                <td>
+                  {% if order_item.item.discount_price %}
+                  €{{order_item.get_total_price}}
+                  <span class="badge badge-primary"> Saving €{{order_item.get_amount_saved}}</span>
+                  {%else%}
+                  €{{order_item.get_total_price}}
+                  {% endif %}
+                </td>
               </tr>
               {% empty %}
               <p>No Items in Cart</p>
