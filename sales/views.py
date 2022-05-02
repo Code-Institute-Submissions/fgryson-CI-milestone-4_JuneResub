@@ -9,6 +9,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import *
 from .forms import CheckoutForm
+from .stripe import stripe_payment
 
 
 class HomeView(ListView):
@@ -53,6 +54,27 @@ class PaymentView(LoginRequiredMixin, View):
             'order': order
         }
         return render(self.request, 'payment.html', context)
+
+    def post(self,*args, **kwargs):
+        # Create Stripe payment
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        token = self.request.POST.get('stripeToken')
+        chargeID = stripe_payment(settings.STRIPE_SECRET_KEY,token, order.get_total(),str(order.id))
+        if (chargeID is not None):
+            order.ordered = True
+
+            # Save the payment
+            payment = Payment()
+            payment.stripe_charge_id = chargeID
+            payment.user = self.request.user
+            payment.price = order.get_total() * 100
+            payment.save()
+            order.payment = payment
+            order.save()
+            return redirect('/')
+        else:
+            messages.error(self.request, "Something went wrong with Stripe. Please try again later")
+            return redirect ('sales:payment')
 
 
 class CheckoutView(LoginRequiredMixin, View):
