@@ -55,11 +55,12 @@ class PaymentView(LoginRequiredMixin, View):
         }
         return render(self.request, 'payment.html', context)
 
-    def post(self,*args, **kwargs):
+    def post(self, *args, **kwargs):
         # Create Stripe payment
         order = Order.objects.get(user=self.request.user, ordered=False)
         token = self.request.POST.get('stripeToken')
-        chargeID = stripe_payment(settings.STRIPE_SECRET_KEY,token, order.get_total(),str(order.id))
+        chargeID = stripe_payment(
+            settings.STRIPE_SECRET_KEY, token, order.get_total(), str(order.id))
         if (chargeID is not None):
             order.ordered = True
 
@@ -73,8 +74,9 @@ class PaymentView(LoginRequiredMixin, View):
             order.save()
             return redirect('/')
         else:
-            messages.error(self.request, "Something went wrong with Stripe. Please try again later")
-            return redirect ('sales:payment')
+            messages.error(
+                self.request, "Something went wrong with Stripe. Please try again later")
+            return redirect('sales:payment')
 
 
 class CheckoutView(LoginRequiredMixin, View):
@@ -93,6 +95,38 @@ class CheckoutView(LoginRequiredMixin, View):
             return render(self.request, 'checkout.html', context)
         except ObjectDoesNotExist:
             return redirect('/')
+
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+
+            if form.is_valid():
+                # Get and save them into the database.
+                street_address = form.cleaned_data.get('street_address')
+                apartment_address = form.cleaned_data.get('apartment_address')
+                country = form.cleaned_data.get('country')
+                postcode = form.cleaned_data.get('postcode')
+                same_shipping_address = form.cleaned_data.get(
+                    'same_shipping_address')
+                save_info = form.cleaned_data.get('save_info')
+                billingAddress = BillingAddress(
+                    user=self.request.user,
+                    street_address=street_address,
+                    apartment_address=apartment_address,
+                    country=country,
+                    postcode=postcode,
+                )
+                billingAddress.save()
+                # Connect address with order (Foreign Key)
+                order.billing_address = billingAddress
+                order.save()
+                return redirect('sales:payment')
+            return render(self.request, 'checkout.html', {'form': form})
+
+        except ObjectDoesNotExist:
+            messages.warning(self.request, "You don't have any active order")
+            return redirect('sales:order')
 
 
 class TestView(TemplateView):
@@ -117,7 +151,8 @@ def add_to_cart(request, slug):
         order_item = order.items.filter(item__slug=slug)
         if order_item.exists():
             quant = order_item[0].quantity
-            order_item.update(quantity=quant + int(request.POST.get('quantity')))
+            order_item.update(
+                quantity=quant + int(request.POST.get('quantity')))
             messages.info(request, "This item has been added to your cart")
         else:
             order_item = OrderItem.objects.create(item=item)
@@ -126,7 +161,8 @@ def add_to_cart(request, slug):
     else:
         ordered_date = timezone.now()
         ordered_item = OrderItem.objects.create(item=item)
-        order = Order.objects.create(user=request.user, ordered_date=ordered_date)
+        order = Order.objects.create(
+            user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item has been added to your cart")
 
