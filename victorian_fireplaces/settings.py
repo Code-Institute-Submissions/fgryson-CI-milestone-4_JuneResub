@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from os.path import join
 from pathlib import Path
 
@@ -21,14 +22,9 @@ STATICFILES_DIRS = (
 )
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zo9gt6qc0&^rvfj)yu1wm*6+*o)t6+l+&d+7ko05(%8jjpyq(5'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG_MODE') == 'TRUE'
 
 ALLOWED_HOSTS = []
 
@@ -156,5 +152,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Variables for STRIPE API
-STRIPE_SECRET_KEY = ''
-STRIPE_PUBLIC_KEY = ''
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
