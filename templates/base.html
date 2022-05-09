@@ -18,24 +18,18 @@
 </head>
 <body>
   <!-- Nav -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark black scrolling-navbar">
+  <nav class="navbar navbar-light fixed-top navbar-expand-lg bg-light scrolling-navbar">
     <div class="container">
       <!-- Brand -->
-      <a href="/" class="navbar-brand">
+      <a href="{% url 'sales:home' %}" class="navbar-brand">
         <strong>Victorian Fireplace Company</strong>
       </a>
-
-      <!-- Collapsible -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
       <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a href="{% url 'sales:home' %}" class="nav-link">Home</a>
+            <a href="" class="nav-link">Home</a>
           </li>
         </ul>
       </div>
