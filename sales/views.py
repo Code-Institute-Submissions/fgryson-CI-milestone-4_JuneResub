@@ -20,6 +20,17 @@ class HomeView(ListView):
     paginated_by = 10
     template_name = 'home.html'
 
+    def get_queryset(self):
+        if 'category' in self.kwargs:
+            category = self.kwargs['category']
+        else:
+            category = ""
+
+        if category == "":
+            return super().get_queryset()
+        else:
+            return Item.objects.filter(category=category)
+
 
 class ItemDetailView(DetailView):
     """
