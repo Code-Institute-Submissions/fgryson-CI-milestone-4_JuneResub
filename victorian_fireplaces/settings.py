@@ -28,7 +28,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG_MODE') == 'TRUE'
 
 ALLOWED_HOSTS = [
-    'victorian-fireplaces.herokuapp.com'
+    'victorian-fireplaces.herokuapp.com',
+    'localhost'
 ]
 
 
