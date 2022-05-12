@@ -1,7 +1,9 @@
+from distutils.command.upload import upload
 from allauth.utils import get_user_model
 from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
+from s3direct.fields import S3DirectField
 
 User = get_user_model()
 
@@ -26,7 +28,7 @@ class Item(models.Model):
     category = models.CharField(
         choices=CATEGORY_CHOICES, max_length=10, default='PA')
     slug = models.SlugField(unique=True)
-    image = models.ImageField()
+    image = S3DirectField(dest='primary_destination', blank=True)
 
     def __str__(self):
         return self.title

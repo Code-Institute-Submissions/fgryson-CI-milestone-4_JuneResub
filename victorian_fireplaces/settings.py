@@ -25,11 +25,20 @@ STATICFILES_DIRS = (
 
 # AWS setup
 if 'USE_AWS' in os.environ:
+    AWS_S3_ENDPOINT_URL = 'https://s3.amazonaws.com'
     AWS_STORAGE_BUCKET_NAME = 'ci4-victorian-fireplaces'
     AWS_S3_REGION_NAME = 'eu-west-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # S3 Direct Settings
+    S3DIRECT_DESTINATIONS = {
+        'primary_destination': {
+            'key': 'media/',
+            'allowed': ['image/jpg', 'image/jpeg', 'image/png'],
+        },
+    }
 
     # Static and Media Files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
