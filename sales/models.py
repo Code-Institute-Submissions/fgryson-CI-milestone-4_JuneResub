@@ -28,7 +28,7 @@ class Item(models.Model):
     category = models.CharField(
         choices=CATEGORY_CHOICES, max_length=10, default='PA')
     slug = models.SlugField(unique=True)
-    image = S3DirectField(dest='primary_destination', blank=True)
+    image = S3DirectField(dest='primary_destination')
 
     def __str__(self):
         return self.title
