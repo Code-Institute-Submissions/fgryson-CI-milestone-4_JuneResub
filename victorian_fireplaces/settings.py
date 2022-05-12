@@ -82,6 +82,7 @@ INSTALLED_APPS = [
 
     # Misc
     'storages',
+    's3direct',
 ]
 
 MIDDLEWARE = [
