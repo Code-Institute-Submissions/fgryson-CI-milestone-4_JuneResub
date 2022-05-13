@@ -3,7 +3,6 @@ from allauth.utils import get_user_model
 from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
-from s3direct.fields import S3DirectField
 
 User = get_user_model()
 
