@@ -15,6 +15,7 @@ Create a ecommerce website for the sale of fireplace parts and accessories.
 
 ### 1.3. Design
 
+A clean design was opted for to create a clear uncluttered store for the sale of products.
 
 ### 1.4. Wireframes
 
