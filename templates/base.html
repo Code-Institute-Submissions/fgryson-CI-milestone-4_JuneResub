@@ -30,6 +30,13 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a href="" class="nav-link">Home</a>
+            {% if user.is_authenticated%}
+            <a href="{% url 'sales:checkout' %}" class="nav-link">Checkout</a>
+            <a href="{{ logout_url }}" class="nav-link">Logout</a>
+            {% else %}
+            <a href="{{ login_url }}" class="nav-link">Login</a>
+            <a href="{{ signup_url }}" class="nav-link">Sign Up</a>
+            {% endif %}
           </li>
         </ul>
       </div>
