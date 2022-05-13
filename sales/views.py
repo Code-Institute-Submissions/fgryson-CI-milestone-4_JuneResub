@@ -37,7 +37,6 @@ class ItemDetailView(DetailView):
     Display detail view for single item
     """
     model = Item
-    template = 'product.html'
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
