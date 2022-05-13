@@ -32,10 +32,10 @@
           <li class="nav-item active">
             {% if user.is_authenticated%}
             <a href="{% url 'sales:checkout' %}" class="nav-link">Checkout</a>
-            <a href="{{ url 'account_logout' }}" class="nav-link">Logout</a>
+            <a href="{% url 'account_logout' %}" class="nav-link">Logout</a>
             {% else %}
-            <a href="{{ url 'account_login' }}" class="nav-link">Login</a>
-            <a href="{{ url 'account_signup' }}" class="nav-link">Sign Up</a>
+            <a href="{% url 'account_login' %}" class="nav-link">Login</a>
+            <a href="{% url 'account_signup' %}" class="nav-link">Sign Up</a>
             {% endif %}
           </li>
         </ul>
