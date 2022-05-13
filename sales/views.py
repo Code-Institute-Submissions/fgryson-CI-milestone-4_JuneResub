@@ -170,7 +170,7 @@ def add_to_cart(request, slug):
             messages.info(request, "This item has been added to your cart")
     else:
         ordered_date = timezone.now()
-        ordered_item = OrderItem.objects.create(item=item)
+        order_item = OrderItem.objects.create(item=item)
         order = Order.objects.create(
             user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
