@@ -21,6 +21,7 @@ TEMPLATE_DIR = join(BASE_DIR, 'templates')
 STATICFILES_DIRS = (
     join(BASE_DIR, 'static'),
 )
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # AWS setup
