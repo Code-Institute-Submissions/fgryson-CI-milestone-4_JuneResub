@@ -41,6 +41,8 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return redirect('/')
 
 
+# TODO:
+# - Test PaymentView
 class PaymentView(LoginRequiredMixin, View):
     """
     Handles Stripe payments via the Stripe API

@@ -26,6 +26,10 @@ A clean design was opted for to create a clear uncluttered store for the sale of
 
 ### 1.4. Wireframes
 
+<!--
+FIXME:
+- Redo Wireframes
+-->
 Wireframes were made using a Remarkable 2 Tablet.
 
 You can see them [here](readme-images/).
@@ -63,6 +67,10 @@ You can see them [here](readme-images/).
 
 See more on testing methodology [here](TESTING.md).
 
+<!--
+TODO:
+- Extend Deployment section
+-->
 ## 5. Deployment
 
 The project was deployed with Heroku using S3Buckets for Static and Media storage.
