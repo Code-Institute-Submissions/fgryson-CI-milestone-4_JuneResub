@@ -1,8 +1,3 @@
-<!--
-FIXME:
-- Add more images
-- Extend testing procedure descriptions
--->
 # Testing
 
 ## Code validation
